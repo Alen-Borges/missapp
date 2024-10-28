@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21953547002",
+    "project_id": "missappvale",
+    "storage_bucket": "missappvale.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21953547002:android:cc2e68ddcbe12fd30b1743",
+        "android_client_info": {
+          "package_name": "com.misscompany.missapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWnmK2x4yVjOyv2hOjf3IgkKyK75AfOL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
