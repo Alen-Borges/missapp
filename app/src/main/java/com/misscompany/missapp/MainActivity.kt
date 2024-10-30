@@ -1,17 +1,13 @@
 package com.misscompany.missapp
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import com.google.firebase.Firebase
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.AppBarConfiguration
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.misscompany.missapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,29 +15,34 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    //Declarando instancia de firebase
-    private lateinit var auth: FirebaseAuth
-    val mail = "mail"
-    val password = "password"
+    // Declaración de la instancia de FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Inflar la vista y asignar el layout principal
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Inicializar firebase
-        auth = Firebase.auth
+        // Inicializar Firebase antes de usar cualquier componente de Firebase
+        FirebaseApp.initializeApp(this)
 
-        auth.createUserWithEmailAndPassword(mail, password)
+        val auth: FirebaseAuth
+
+        // Inicializar la instancia de FirebaseAuth
+        auth = FirebaseAuth.getInstance()
+
+        // Obtener referencias a los EditTexts después de setContentView
+        val mail = findViewById<EditText>(R.id.txtEmail)
+        val password = findViewById<EditText>(R.id.txtPassword)
 
     }
 
     override fun onStart() {
         super.onStart()
-        val usuarioActual = auth.currentUser
-        // si el usuario existe, entonces hace reload
-        usuarioActual?.reload()
+//        val usuarioActual = auth.currentUser
+//        // Recarga del usuario si ya está autenticado
+//        usuarioActual?.reload()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,5 +56,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

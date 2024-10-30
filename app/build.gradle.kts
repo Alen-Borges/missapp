@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 
-    // Firebase Plugin
-    id("com.google.gms.google-services") version "4.4.2" apply false
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -39,12 +38,15 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    buildToolsVersion = "35.0.0"
 }
+
 
 dependencies {
 
-//    Firebase Dependency
+    //Firebase Dependency
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-analytics")
     // Firebase auth
     implementation("com.google.firebase:firebase-auth")
 
@@ -62,3 +64,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+

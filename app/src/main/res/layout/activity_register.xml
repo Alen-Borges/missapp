@@ -78,10 +78,10 @@
 
         <TextView
             android:id="@+id/txtCuenta"
-            android:layout_width="82dp"
+            android:layout_width="43dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="                   ¿Ya tienes una cuenta?" />
+            android:text="              ¿Ya tienes una cuenta?" />
 
         <TextView
             android:id="@+id/txtRegistrar"
