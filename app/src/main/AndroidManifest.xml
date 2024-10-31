@@ -26,6 +26,11 @@
             android:exported="true"
             android:theme="@style/Theme.MissApp" >
         </activity>
+        <activity android:name=".HomeActivity"
+        android:exported="true"
+        android:theme="@style/Theme.MissApp" >
+    </activity>
+
     </application>
 
 </manifest>

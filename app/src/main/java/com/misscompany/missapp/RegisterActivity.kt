@@ -2,12 +2,14 @@ package com.misscompany.missapp
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +35,12 @@ class RegisterActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.txtPassword)
         val confirmedPassword = findViewById<EditText>(R.id.txtConfirmPassword)
         val btnLogin = findViewById<ImageButton>(R.id.btnLogIn)
+        val txtLogin = findViewById<TextView>(R.id.txtLogin)
 
+        txtLogin.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         //Inicializar firebase
         auth = Firebase.auth
@@ -47,9 +54,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val usuarioActual = auth.currentUser
-        // si el usuario existe, entonces hace reload
-        usuarioActual?.reload()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,7 +72,8 @@ class RegisterActivity : AppCompatActivity() {
         if (password != confirmedPassword) {
             showErrorPopup(this, "Las contraseñas no coinciden.")
         } else {
-            auth.createUserWithEmailAndPassword(email, email)
+            auth.createUserWithEmailAndPassword(email, password)
+            showErrorPopup(this, "Te has registrado correctamente, ya puedes iniciar sesion.")
         }
 
     }
