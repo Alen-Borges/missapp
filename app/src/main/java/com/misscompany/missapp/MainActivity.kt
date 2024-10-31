@@ -1,9 +1,11 @@
 package com.misscompany.missapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.FirebaseApp
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
 
     // Declaración de la instancia de FirebaseAuth
 
@@ -35,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         // Obtener referencias a los EditTexts después de setContentView
         val mail = findViewById<EditText>(R.id.txtEmail)
         val password = findViewById<EditText>(R.id.txtPassword)
+
+        val txtRegister = findViewById<TextView>(R.id.txtRegistrar)
+
+        txtRegister.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 

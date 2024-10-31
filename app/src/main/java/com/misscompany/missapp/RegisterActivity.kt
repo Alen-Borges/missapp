@@ -13,30 +13,34 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.misscompany.missapp.databinding.ActivityMainBinding
+import com.misscompany.missapp.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     //Declarando instancia de firebase
     private lateinit var auth: FirebaseAuth
-    val mail = findViewById<EditText>(R.id.txtEmail)
-    val password = findViewById<EditText>(R.id.txtPassword)
-    val confirmedPassword = findViewById<EditText>(R.id.txtConfirmPassword)
-    val btnLogin = findViewById<ImageButton>(R.id.btnLogIn)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val mail = findViewById<EditText>(R.id.txtEmail)
+        val password = findViewById<EditText>(R.id.txtPassword)
+        val confirmedPassword = findViewById<EditText>(R.id.txtConfirmPassword)
+        val btnLogin = findViewById<ImageButton>(R.id.btnLogIn)
+
 
         //Inicializar firebase
         auth = Firebase.auth
 
         //Crear nuevo usuario
         btnLogin.setOnClickListener{
-            newUser()
+            newUser(mail.text.toString(), password.text.toString(), confirmedPassword.text.toString())
         }
 
     }
@@ -60,12 +64,11 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun newUser() {
-        if (password.text.toString() != confirmedPassword.text.toString()) {
-            auth.createUserWithEmailAndPassword(mail.text.toString(), password.text.toString())
-
-        } else {
+    fun newUser(email: String, password: String, confirmedPassword: String) {
+        if (password != confirmedPassword) {
             showErrorPopup(this, "Las contraseñas no coinciden.")
+        } else {
+            auth.createUserWithEmailAndPassword(email, email)
         }
 
     }
